@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 # -*-coding:UTF-8 -*
-# Programme qui va parcourir les playlists d'un compte jamendo
-# Puis récupérer les musiques qui ne sont pas dans le dossier local
+# Script which parse the public playlists of a Jamendo user 
+# and upload the music files in a local directory
+# @author douze12
+# @date 09/12/2014
 
 #imports
 from jamendoApi import *
