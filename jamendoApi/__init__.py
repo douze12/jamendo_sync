@@ -51,12 +51,12 @@ class JamendoUtil:
         
         return obj["results"][0]["id"]
     
-    def getPublicPlaylists(self, userId):
+    def getPublicPlaylists(self, userId, limit = 10, offset = 0):
         
         if(userId == None or int(userId) <= 0):
             raise Exception("User id must be set")
         
-        requestUrl = self.base_url + "/playlists/?%s" % self._createUrlParameters(user_id=userId)
+        requestUrl = self.base_url + "/playlists/?%s" % self._createUrlParameters(user_id=userId, limit=limit, offset = offset)
         request = urllib.request.Request(requestUrl)
         response = urllib.request.urlopen(request)
             

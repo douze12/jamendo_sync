@@ -19,6 +19,7 @@ configKeys=["jamendoUrl","clientId","userName","destDir"]
 delimiter=";"
 logFile=".log"
 logLevel=log.DEBUG
+playlistLimit=10
 
 #log configuration
 log.basicConfig(filename=logFile,level=logLevel)
@@ -120,13 +121,24 @@ try:
 except Exception as e:
 	log.exception("Error when trying to get the userId of \"%s\"", config["userName"])
 	raise
+
+playlists = []
+i = 0
+while True:
+		
+	# get the public playlists of the user
+	try:
+		currentPlaylists = jam.getPublicPlaylists(userId, playlistLimit, playlistLimit * i)
+	except Exception as e:
+		log.exception("Error when trying to get public playlists of \"%s\"", config["userName"])
+		raise
+
+	playlists.extend(currentPlaylists)
+
+	if len(currentPlaylists) == 0:
+		break
+	i = i + 1
 	
-# get the public playlists of the user
-try:
-	playlists = jam.getPublicPlaylists(userId)
-except Exception as e:
-	log.exception("Error when trying to get public playlists of \"%s\"", config["userName"])
-	raise
 
 
 if len(playlists) <= 0:
