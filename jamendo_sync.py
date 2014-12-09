@@ -144,6 +144,7 @@ while True:
 if len(playlists) <= 0:
 	log.info("No public playlists for account %s", config["userName"])
 
+log.info("Number of public playlists : %d", len(playlists))
 
 parsePlaylists(playlists, config)
 	
