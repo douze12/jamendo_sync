@@ -14,10 +14,11 @@ import urllib.request
 
 
 # Constants
-configFile="./conf"
+curDir = os.path.dirname(__file__)
+configFile=curDir+"/conf"
 configKeys=["jamendoUrl","clientId","userName","destDir"]
 delimiter=";"
-logFile=".log"
+logFile=curDir+"/.log"
 logLevel=log.DEBUG
 logFormat='%(asctime)s %(levelname)s - %(message)s'
 playlistLimit=10
