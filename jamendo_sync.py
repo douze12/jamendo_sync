@@ -19,10 +19,11 @@ configKeys=["jamendoUrl","clientId","userName","destDir"]
 delimiter=";"
 logFile=".log"
 logLevel=log.DEBUG
+logFormat='%(asctime)s %(levelname)s - %(message)s'
 playlistLimit=10
 
 #log configuration
-log.basicConfig(filename=logFile,level=logLevel)
+log.basicConfig(filename=logFile,level=logLevel, format=logFormat)
 
 
 log.info("Begin")
