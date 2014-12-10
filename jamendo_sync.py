@@ -14,7 +14,7 @@ import urllib.request
 
 
 # Constants
-curDir = os.path.dirname(__file__)
+curDir = os.path.dirname(os.path.realpath(__file__))
 configFile=curDir+"/conf"
 configKeys=["jamendoUrl","clientId","userName","destDir"]
 delimiter=";"
