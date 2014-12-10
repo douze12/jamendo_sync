@@ -87,13 +87,15 @@ def parsePlaylists(playlists, config):
 			log.exception("Error when trying to get the tracks of the playlist named \"%s\"", playlist["name"])
 			continue
 		
-		#new tracksIds we will write in the file 
-		newTracksId=[]
+		tracksPath = []
 		
+		# parse the tracks and upload those which don't exist 
 		for track in tracks:
 			
 			#track file path
 			trackFile = playlistDir + "/" + track["name"].replace("/","") + ".mp3"
+			
+			tracksPath.append(trackFile)
 			
 			#if we allready uploaded the file, no need to re-do it
 			if(os.path.exists(trackFile)):
@@ -108,8 +110,16 @@ def parsePlaylists(playlists, config):
 				log.exception("Error when downloading the audio file \"%s\"", track["name"])
 				continue
 			
-			newTracksId.append(track["id"])
 		
+		# remove the file that don't exists in the playlist
+		for trackFile in os.listdir(playlistDir):
+			
+			trackPath = playlistDir + "/" + trackFile
+			
+			if trackPath not in tracksPath:
+				log.info("Delete track file : %s - no more in the playlist", trackPath)
+				os.remove(trackPath)
+				
 
 # get the configuration from the config file
 config = extractConfig()
